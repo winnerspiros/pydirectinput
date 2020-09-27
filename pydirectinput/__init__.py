@@ -11,7 +11,7 @@ MapVirtualKey = ctypes.windll.user32.MapVirtualKeyW
 
 FAILSAFE = True
 FAILSAFE_POINTS = [(0, 0)]
-PAUSE = 0.1  # Tenth-second pause by default.
+PAUSE = 0  # Tenth-second pause by default.
 
 # Constants for the mouse button names
 LEFT = "left"
@@ -271,7 +271,7 @@ def size():
 
 # Ignored parameters: duration, tween, logScreenshot
 @_genericPyDirectInputChecks
-def mouseDown(x=None, y=None, button=PRIMARY, duration=None, tween=None, logScreenshot=None, _pause=True):
+def mouseDown(x=None, y=None, button=PRIMARY, duration=None, tween=None, logScreenshot=None, _pause=False):
 
     if not x is None or not y is None:
         moveTo(x, y)
@@ -296,7 +296,7 @@ def mouseDown(x=None, y=None, button=PRIMARY, duration=None, tween=None, logScre
 
 # Ignored parameters: duration, tween, logScreenshot
 @_genericPyDirectInputChecks
-def mouseUp(x=None, y=None, button=PRIMARY, duration=None, tween=None, logScreenshot=None, _pause=True):
+def mouseUp(x=None, y=None, button=PRIMARY, duration=None, tween=None, logScreenshot=None, _pause=False):
     
     if not x is None or not y is None:
         moveTo(x, y)
@@ -321,7 +321,7 @@ def mouseUp(x=None, y=None, button=PRIMARY, duration=None, tween=None, logScreen
 
 # Ignored parameters: duration, tween, logScreenshot
 @_genericPyDirectInputChecks
-def click(x=None, y=None, clicks=1, interval=0.0, button=PRIMARY, duration=None, tween=None, logScreenshot=None, _pause=True):
+def click(x=None, y=None, clicks=1, interval=0.0, button=PRIMARY, duration=None, tween=None, logScreenshot=None, _pause=False):
     
     if not x is None or not y is None:
         moveTo(x, y)
@@ -349,11 +349,11 @@ def click(x=None, y=None, clicks=1, interval=0.0, button=PRIMARY, duration=None,
         time.sleep(interval)
 
 
-def leftClick(x=None, y=None, interval=0.0, duration=0.0, tween=None, logScreenshot=None, _pause=True):
+def leftClick(x=None, y=None, interval=0.0, duration=0.0, tween=None, logScreenshot=None, _pause=False):
     click(x, y, 1, interval, LEFT, duration, tween, logScreenshot, _pause)
 
 
-def rightClick(x=None, y=None, interval=0.0, duration=0.0, tween=None, logScreenshot=None, _pause=True):
+def rightClick(x=None, y=None, interval=0.0, duration=0.0, tween=None, logScreenshot=None, _pause=False):
     click(x, y, 1, interval, RIGHT, duration, tween, logScreenshot, _pause)
 
 
@@ -506,7 +506,7 @@ def press(keys, presses=1, interval=0.0, logScreenshot=None, _pause=True):
 # Ignored parameters: logScreenshot
 # nearly identical to PyAutoGUI's implementation
 @_genericPyDirectInputChecks
-def typewrite(message, interval=0.0, logScreenshot=None, _pause=True):
+def typewrite(message, interval=0.0, logScreenshot=None, _pause=False):
     interval = float(interval)
     for c in message:
         if len(c) > 1:
